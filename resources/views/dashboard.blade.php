@@ -14,4 +14,5 @@
             </div>
         </div>
     </div>
+    @include('statistics')
 </x-app-layout>

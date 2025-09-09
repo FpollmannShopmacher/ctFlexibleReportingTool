@@ -34,5 +34,12 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'commercetools' => [
+        'client_id' => env('COMMERCETOOLS_CLIENT_ID'),
+        'client_secret' => env('COMMERCETOOLS_CLIENT_SECRET'),
+        'scope' => env('COMMERCETOOLS_SCOPE'),
+        'region' => env('COMMERCETOOLS_REGION'),
+        'project_key' => env('COMMERCETOOLS_PROJECT_KEY'),
+    ],
 
 ];
