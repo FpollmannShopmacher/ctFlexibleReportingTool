@@ -1,6 +1,5 @@
 <button
         type="submit"
-        name="btn"
         @if(isset($btnName))
             name="{{ $btnName}}"
         @endif

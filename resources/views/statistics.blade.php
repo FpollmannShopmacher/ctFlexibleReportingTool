@@ -45,21 +45,27 @@
                     <div>
                         <label class="text-sm/relaxed" for="data">Select the Data Values:</label>
                         <div class="grid grid-cols-2 gap-x-4">
-                            <div>
-                                <input type="checkbox" id="order-count" name="data-order-count"
-                                       @if(!empty($orderCounts)) checked @endif/>
-                                <label for="order-count">Order Count</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="order-sales" name="data-order-sales"
-                                       @if(!empty($orderSales)) checked @endif/>
-                                <label for="order-sales">Order Sales</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="customer-count" name="data-customer-count"
-                                       @if(!empty($customerCounts)) checked @endif/>
-                                <label for="customer-count">Customer Count</label>
-                            </div>
+                            @if(isset($userRights) && str_contains($userRights, 'order-count'))
+                                <div>
+                                    <input type="checkbox" id="order-count" name="data-order-count"
+                                           @if(!empty($orderCounts)) checked @endif/>
+                                    <label for="order-count">Order Count</label>
+                                </div>
+                            @endif
+                            @if(isset($userRights) && str_contains($userRights, 'order-sales'))
+                                <div>
+                                    <input type="checkbox" id="order-sales" name="data-order-sales"
+                                           @if(!empty($orderSales)) checked @endif/>
+                                    <label for="order-sales">Order Sales</label>
+                                </div>
+                            @endif
+                            @if(isset($userRights) && str_contains($userRights, 'customer-count'))
+                                <div>
+                                    <input type="checkbox" id="customer-count" name="data-customer-count"
+                                           @if(!empty($customerCounts)) checked @endif/>
+                                    <label for="customer-count">Customer Count</label>
+                                </div>
+                            @endif
                         </div>
                     </div>
 

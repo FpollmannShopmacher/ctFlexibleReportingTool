@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use stdClass;
 
 class StatisticsService
@@ -22,29 +23,34 @@ class StatisticsService
 
     public function fetchStatistic(Request $request): array
     {
-        $urlParams = $request->query();
-        $mappedParamsArr = $this->mapRequestParams($urlParams);
-
-        $selectedPeriods = get_object_vars($mappedParamsArr['period']);
-        $selectedData = get_object_vars($mappedParamsArr['data']);
-
         $orderCounts = [];
         $orderSales = [];
         $customerCounts = [];
 
-        if (isset($selectedData['order-count'])) {
-            $orderCounts = $this->fetchOrderCountsByPeriod($selectedPeriods);
+        $userRights = Auth::user()->user_rights;
+
+        $urlParams = $request->query();
+
+        if ($urlParams != []) {
+            $mappedParamsArr = $this->mapRequestParams($urlParams);
+
+            $selectedPeriods = get_object_vars($mappedParamsArr['period']);
+            $selectedData = get_object_vars($mappedParamsArr['data']);
+
+            if (isset($selectedData['order-count'])) {
+                $orderCounts = $this->fetchOrderCountsByPeriod($selectedPeriods);
+            }
+
+            if (isset($selectedData['order-sales'])) {
+                $orderSales = $this->fetchOrderSalesByPeriod($selectedPeriods);
+            }
+
+            if (isset($selectedData['customer-count'])) {
+                $customerCounts = $this->fetchCustomerCountsByPeriod($selectedPeriods);
+            }
         }
 
-        if (isset($selectedData['order-sales'])) {
-            $orderSales = $this->fetchOrderSalesByPeriod($selectedPeriods);
-        }
-
-        if (isset($selectedData['customer-count'])) {
-            $customerCounts = $this->fetchCustomerCountsByPeriod($selectedPeriods);
-        }
-
-        return ['orderSales' => $orderSales, 'orderCounts' => $orderCounts, 'customerCounts' => $customerCounts];
+        return ['orderSales' => $orderSales, 'orderCounts' => $orderCounts, 'customerCounts' => $customerCounts, 'userRights' => $userRights];
     }
 
     private function mapRequestParams(array $input): array
