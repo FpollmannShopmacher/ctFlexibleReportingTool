@@ -11,7 +11,8 @@
         "commercetools/commercetools-sdk": "^10.16",
         "filament/filament": "^4.0",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "phpdocumentor/shim": "^3.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -84,7 +85,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "phpdocumentor/shim": true
         }
     },
     "minimum-stability": "stable",

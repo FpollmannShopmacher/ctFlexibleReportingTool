@@ -67,6 +67,7 @@
                                 </div>
                             @endif
                         </div>
+{{--                            <div class="text-red-600">Your user account does not have any rights for data analysis. Please contact the administrator.</div>--}}
                     </div>
 
                 </div>
